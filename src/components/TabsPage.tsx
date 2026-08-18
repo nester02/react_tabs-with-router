@@ -1,4 +1,4 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useLocation } from 'react-router-dom';
 import cn from 'classnames';
 
 const tabs = [
@@ -9,6 +9,7 @@ const tabs = [
 
 export const TabsPage = () => {
   const { tabId } = useParams();
+  const { pathname } = useLocation();
 
   const selectedTab = tabs.find(tab => tab.id === tabId);
 
@@ -22,7 +23,7 @@ export const TabsPage = () => {
             <li
               data-cy="Tab"
               key={tab.id}
-              className={cn({ 'is-active': tab.id === tabId })}
+              className={cn({ 'is-active': pathname === `/tabs/${tab.id}` })}
             >
               <Link to={`/tabs/${tab.id}`}>{tab.title}</Link>
             </li>
